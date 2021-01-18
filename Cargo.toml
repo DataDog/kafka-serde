@@ -1,0 +1,16 @@
+[package]
+name = "kafka-serde"
+edition = "2018"
+version = "0.1.0"
+authors = [ "Glauber Costa <glauber@datadoghq.com>" ]
+description = "serialization and deserialization for the Kafka protocol"
+repository = "https://github.com/DataDog/kafka-serde"
+homepage = "https://github.com/DataDog/kafka-serde"
+keywords = ["serde", "kafka"]
+categories = ["Encoding", "Database Interfaces"]
+readme = "README.md"
+
+[dependencies]
+serde = { version = "1.0", features = ["derive"] }
+serde_repr = "0.1"
+endianness = "0.2.0"
