@@ -1,3 +1,8 @@
+// Unless explicitly stated otherwise all files in this repository are licensed under the
+// MIT/Apache-2.0 License, at your convenience
+//
+// This product includes software developed at Datadog (https://www.datadoghq.com/). Copyright 2021
+// Datadog, Inc.
 //! # kafka_serde - serializers and deserializers for the kafka protocol
 //!
 //! Details: Options are allowed during serialization, but not deserialization

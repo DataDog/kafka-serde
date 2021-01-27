@@ -1,0 +1,6 @@
+Component,Origin,License,Copyright
+serde,https://github.com/serde-rs/serde,MIT/Apache-2.0,David Tolnay/Erick Tryzelaar
+serde_repr,https://github.com/dtolnay/serde-repr,MIT/Apache-2.0,David Tolnay
+endianess,https://github.com/igrslv/rust-endianness.git,MIT,salauyou.ihar@gmail.com
+fluvio-protocol-core,https://github.com/infinyon/flv-kf-protocol,Apache-2.0,Fluvio Contributors
+
