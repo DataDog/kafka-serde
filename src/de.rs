@@ -95,15 +95,14 @@ impl<'de> KafkaDeserializer<'de> {
 /// # Examples
 /// ```
 /// use serde::Deserialize;
-/// use kafka_serde::{Result, from_bytes};
 ///
 /// #[derive(Deserialize, Debug, Default)]
 /// struct ResponseHeader {
 ///     correlation_id: i32,
 /// }
-/// 
-/// fn get_header(data: &[u8]) -> Result<ResponseHeader> {
-///     let resp: ResponseHeader = from_bytes(data)?;
+///
+/// fn get_header(data: &[u8]) -> kafka_serde::Result<ResponseHeader> {
+///     let resp: ResponseHeader = kafka_serde::from_bytes(data)?;
 ///     Ok(resp)
 /// }
 /// ```
@@ -456,6 +455,18 @@ mod test {
         bytes: &'a [u8],
     }
 
+    #[derive(Deserialize, Debug, Default)]
+    struct Foo<'a> {
+        string: &'a str,
+        bytes: &'a [u8],
+    }
+
+    #[derive(Deserialize, Debug, Default)]
+    struct ByteReferenceSeq<'a> {
+        #[serde(borrow)]
+        bytes: Vec<Foo<'a>>,
+    }
+
     #[test]
     fn test_serde_decode_string() {
         let data = [
@@ -497,6 +508,17 @@ mod test {
         let dummy: DummyByteReference<'_> = from_bytes(&data).unwrap();
         assert_eq!(dummy.bytes.len(), 10);
         assert_eq!(dummy.bytes, &data[4..]);
+    }
+
+    #[test]
+    fn test_serde_decode_byte_reference_sequence() {
+        let data = [
+            0x00, 0x00, 0x00, 0x01, 0x00, 0x0a, 0x63, 0x6f, 0x6e, 0x73, 0x75, 0x6d, 0x65, 0x72,
+            0x2d, 0x31, 0x00, 0x00, 0x00, 0x01, 0x0a,
+        ];
+
+        let dummy: ByteReferenceSeq<'_> = from_bytes(&data).unwrap();
+        assert_eq!(dummy.bytes.len(), 1);
     }
 
     #[test]

@@ -28,6 +28,6 @@ mod de;
 mod error;
 mod ser;
 
-pub use self::error::{Error, ErrorKind, Result};
 pub use self::de::from_bytes;
+pub use self::error::{Error, ErrorKind, Result};
 pub use self::ser::to_writer;
