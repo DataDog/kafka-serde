@@ -11,16 +11,14 @@ struct KafkaSerializer<W> {
     writer: W,
 }
 
-
 /// Serializes a kafka payload into a I/O stream
-/// 
+///
 /// Often times the kafka protocol will require the message to be manipulated after serializing
 /// (for instance to add the size to the beginning), so the initial stream is returned.
 ///
 /// # Examples
 /// ```
 /// use serde::Serialize;
-/// use kafka_serde::{Result, from_bytes};
 /// use std::io::{Write, Cursor};
 ///
 /// #[derive(Serialize, Debug)]
@@ -37,7 +35,7 @@ struct KafkaSerializer<W> {
 ///     correlation_id: 1,
 ///     client_id: ""
 /// };
-/// 
+///
 /// let mut x = Cursor::new(Vec::<u8>::with_capacity(std::mem::size_of::<RequestHeader>()));
 /// x.set_position(4u64); // leave space for the size;
 /// let mut x = kafka_serde::to_writer(x, &req).unwrap();
